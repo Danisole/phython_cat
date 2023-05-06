@@ -1,0 +1,96 @@
+{% extends "AppCoder/padre.html" %}
+
+{% load static %}
+
+{% block titulo %} 
+
+    <h1 class="text-center my-5">Menus</h1>
+
+{% endblock %}
+
+{% block imagen %} 
+<br><br>
+<img src="../../static/AppCoder/assets/gato_mesa.jpg" class="img-fluid" alt="dibujo" style="width: 300px; height: auto; -webkit-transform: rotate(45deg); -moz-transform: rotate(45deg); -ms-transform: rotate(45deg); -o-transform: rotate(45deg); transform: rotate(45deg);">
+<br><br>
+
+{% endblock %}
+
+{% block titulo2 %} 
+
+<h2 class="text-center my-5">Como elegir tu menu</h2>
+
+{% endblock %}
+
+{% block imagen2 %} 
+
+<img src="../../static/AppCoder/assets/cafe_lemon.jpg" class="img-fluid" alt="dibujo" style="height: 500px; width: auto; border-radius: 50%;">
+
+{% endblock %}
+
+{% block tituloForm %} 
+
+<h4 class="text-center h3_contacto">Busca tu menu para cada hora del dia</h4>
+<br>
+{% endblock %}
+
+{% block formulario %} 
+
+<form action="{% url 'buscar' %}" method="GET" class="text-center">
+
+    <label for="nombre">Hora del dia</label>
+        <select name="nombre" id="nombre">
+            <option value="">Elige tu menu</option>
+            <option value="desayuno">Desayuno</option>
+            <option value="almuerzo">Almuerzo</option>
+            <option value="merienda">Merienda</option>
+            <option value="cena">Cena</option>
+        </select>
+    <!-- <input type="text" name="region" id="region">     -->
+    <input type="submit" value="Buscar">
+    
+</form>
+<br>
+{% if menus %} 
+
+<h5 class="text-center h5_contacto">Menus disponibles</h5>
+<br>
+{{ mensaje }}
+
+<div class="container">
+    <table class="table table-light">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Menu</th>                      
+                <th>Personas</th> 
+                <th>Seleccionar</th>                   
+            </tr>
+        </thead>
+
+        <tbody>
+        {% for menu in menus %} 
+            <tr>
+                <td>
+                    {{ menu.nombre }}
+                </td>
+                <td>
+                    {{ menu.ingredientes }}
+                </td>
+                <td>
+                    {{ menu.personas }}
+                </td>
+                <td>
+                    <input type="checkbox">
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% else %} 
+
+<h4 class="text-center h5_contacto">No hay menus disponibles</h4>
+
+{% endif %} 
+
+{% endblock %}
